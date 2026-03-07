@@ -11,11 +11,7 @@
     {
       "name": "linkedin-content-hub",
       "description": "Gestisci contenuti LinkedIn: piani editoriali, post, revisioni, scheduling via 20 tool MCP",
-      "source": ".",
-      "strict": false,
-      "skills": [
-        "./skills/lch"
-      ]
+      "source": "."
     }
   ]
 }
