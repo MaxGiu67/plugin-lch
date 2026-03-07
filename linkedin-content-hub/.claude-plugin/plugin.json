@@ -1,6 +1,6 @@
 {
   "name": "linkedin-content-hub",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Plugin Cowork per gestire piani editoriali, post LinkedIn, revisioni e scheduling tramite il server MCP di LinkedIn Content Hub",
   "author": {
     "name": "Massimiliano Giurelli"
