@@ -1,0 +1,21 @@
+{
+  "name": "plugin-lch",
+  "owner": {
+    "name": "MaxGiu67"
+  },
+  "metadata": {
+    "description": "Plugin Cowork per gestire piani editoriali, post LinkedIn, revisioni e scheduling tramite il server MCP di LinkedIn Content Hub",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "linkedin-content-hub",
+      "description": "Gestisci contenuti LinkedIn: piani editoriali, post, revisioni, scheduling via 20 tool MCP",
+      "source": ".",
+      "strict": false,
+      "skills": [
+        "./skills/lch"
+      ]
+    }
+  ]
+}
