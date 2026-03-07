@@ -78,13 +78,17 @@ Pubblica un post immediatamente (solo Owner).
 ## Piani editoriali (6 tool)
 
 ### create_plan
-Crea un nuovo piano editoriale trimestrale.
+Crea un nuovo piano editoriale.
 
 | Parametro | Tipo | Required | Descrizione |
 |-----------|------|----------|-------------|
 | name | string | si | Nome del piano |
-| quarter | int (1-4) | si | Trimestre |
-| year | int | si | Anno |
+| start_date | string (YYYY-MM-DD) | si | Data inizio |
+| end_date | string (YYYY-MM-DD) | si | Data fine |
+| description | string | no | Descrizione del piano |
+| objective | string | no | Obiettivo del piano |
+| cadence_days | int[] (0-6) | no | Giorni pubblicazione (0=Dom..6=Sab). Default: [1,3,5] Lun/Mer/Ven |
+| cadence_times | string[] (HH:MM) | no | Orari pubblicazione. Default: ["09:00"] |
 
 ### list_plans
 Lista tutti i piani editoriali.
@@ -107,14 +111,14 @@ Lista gli slot vuoti disponibili per scheduling.
 | limit | int | no | Max risultati |
 
 ### generate_slots
-Genera slot automatici per un piano.
+Genera slot automatici per un piano. Usa la cadenza del piano o override personalizzati. Solo piani IN_PREPARAZIONE.
 
 | Parametro | Tipo | Required | Descrizione |
 |-----------|------|----------|-------------|
 | plan_id | UUID | si | ID del piano |
-| days_of_week | int[] | si | Giorni della settimana (0=dom, 1=lun, ..., 6=sab) |
-| time | string (HH:MM) | si | Ora di pubblicazione |
-| theme_id | UUID | no | Tema da assegnare agli slot |
+| days_of_week | int[] (0-6) | no | Override giorni (aggiorna anche il piano) |
+| times | string[] (HH:MM) | no | Override orari (aggiorna anche il piano) |
+| theme_id | UUID | no | Tema da assegnare a tutti gli slot generati |
 
 ### assign_post_to_slot
 Assegna un post a uno slot del piano senza cambiarne lo stato.
@@ -122,6 +126,35 @@ Assegna un post a uno slot del piano senza cambiarne lo stato.
 | Parametro | Tipo | Required | Descrizione |
 |-----------|------|----------|-------------|
 | post_id | UUID | si | ID del post |
+| slot_id | UUID | si | ID dello slot |
+
+---
+
+## Slot (3 tool)
+
+### create_slot
+Crea uno slot singolo a data/ora specifica. Per slot fuori dalla cadenza regolare.
+
+| Parametro | Tipo | Required | Descrizione |
+|-----------|------|----------|-------------|
+| plan_id | UUID | si | ID del piano |
+| scheduled_at | ISO 8601 | si | Data e ora dello slot (es. "2026-03-15T14:30:00") |
+| theme_id | UUID | no | Tema da assegnare |
+
+### update_slot
+Sposta uno slot a una nuova data/ora o cambia tema.
+
+| Parametro | Tipo | Required | Descrizione |
+|-----------|------|----------|-------------|
+| slot_id | UUID | si | ID dello slot |
+| scheduled_at | ISO 8601 | no | Nuova data/ora |
+| theme_id | UUID | no | Nuovo tema |
+
+### delete_slot
+Elimina uno slot vuoto (senza post assegnato).
+
+| Parametro | Tipo | Required | Descrizione |
+|-----------|------|----------|-------------|
 | slot_id | UUID | si | ID dello slot |
 
 ---

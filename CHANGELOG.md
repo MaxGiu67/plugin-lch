@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0] - 2026-03-07
+
+### Aggiunto
+- 3 nuovi tool MCP: `create_slot`, `update_slot`, `delete_slot` (CRUD slot personalizzati)
+- `create_plan`: parametri `cadence_days` e `cadence_times` per cadenza personalizzata
+- `generate_slots`: override giorni/orari + assegnazione tema massiva
+- Reference aggiornata a 23 tool MCP
+
+### Modificato
+- Reference mcp-tools-reference.md aggiornata con nuovi tool e parametri
+
+---
+
 ## [0.1.0] - 2026-03-07
 
 ### Aggiunto
