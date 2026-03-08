@@ -221,7 +221,7 @@ Rifiuta un post in revisione (IN_REVIEW -> REJECTED).
 
 ---
 
-## Engagement (2 tool)
+## Engagement (3 tool)
 
 ### configure_engagement
 Crea una campagna di engagement per un post pubblicato. I task vengono generati automaticamente per tutti i membri del team e collaboratori esterni.
@@ -232,7 +232,16 @@ Crea una campagna di engagement per un post pubblicato. I task vengono generati 
 
 Ritorna: `campaign_id`, `post_id`, `status: PENDING`, `tasks_created`
 
-All'attivazione della campagna, l'IA genera un messaggio WhatsApp personalizzato per ogni collaboratore (campo `aiMessage` sulla task). Non servono template.
+### activate_campaign
+Attiva una campagna PENDING: genera messaggi AI personalizzati con Claude per ogni collaboratore e li invia via WhatsApp (solo Owner). Richiede un LLM Provider attivo.
+
+| Parametro | Tipo | Required | Descrizione |
+|-----------|------|----------|-------------|
+| campaign_id | UUID | si | ID della campagna (deve essere PENDING) |
+
+Ritorna: `campaign_id`, `status: ACTIVE`, `tasks_sent`, `tasks_total`, `errors`
+
+Flusso tipico: `configure_engagement` → `activate_campaign` → `get_engagement_status`
 
 ### get_engagement_status
 Stato della campagna di engagement per un post.
@@ -374,7 +383,7 @@ Ritorna: `ai_images` (totalUsd, totalGenerations, successCount, failureCount, av
 
 ---
 
-## Totale: 40 tool
+## Totale: 41 tool
 
 | Categoria | Count |
 |-----------|-------|
@@ -382,10 +391,10 @@ Ritorna: `ai_images` (totalUsd, totalGenerations, successCount, failureCount, av
 | Piani editoriali | 6 |
 | Slot | 3 |
 | Revisione | 3 |
-| Engagement | 2 |
+| Engagement | 3 |
 | Collaboratori | 4 |
 | Calendario | 1 |
 | Temi | 4 |
 | AI Immagini | 1 |
 | Utility | 3 |
-| **Totale** | **40** |
+| **Totale** | **41** |
